@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Citizen Journal - Neighbors Promotion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Skeleton CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .centered-content {
+      text-align: center;
+    }
+    img {
+      max-width: 75%;
+      height: auto;
+    }
+    /* Optional styling for the code display */
+    #codeDisplay {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container centered-content">
+    <div class="row">
+      <!-- Image Column -->
+      <div class="six columns">
+        <img src="https://rosebud-ads.s3.us-east-2.amazonaws.com/ItunesArtwork%402x.png" alt="rosebud" />
+      </div>
+      <!-- Text Column -->
+      <div class="six columns">
+        <p>
+          Take 6-digit code to Neighbors and check-in (scan the QR code) to claim your free cinammon roll. Do not lose this code!        </p>
+        <p>Your 6-digit code is:</p>
+        <!-- Element to hold/display the code -->
+        <p id="codeDisplay"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fetch and display the code when the page loads -->
+  <script>
+    window.addEventListener('load', function() {
+      // Update the URL below to the exact API endpoint you need
+      fetch('https://u1bd9a4lc4.execute-api.us-east-2.amazonaws.com/prod/generate-code')
+        .then(response => response.json())
+        .then(data => {
+          // Depending on how your API returns data,
+          // you may need to adjust the property used below:
+          // e.g. `document.getElementById('codeDisplay').textContent = data.code;`
+          document.getElementById('codeDisplay').textContent = data.code;
+        })
+        .catch(error => {
+          console.error('Error fetching code:', error);
+          document.getElementById('codeDisplay').textContent = 'Error fetching code';
+        });
+    });
+  </script>
+</body>
+</html>
+
+
